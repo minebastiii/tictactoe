@@ -17,13 +17,23 @@ def print_board(board):
 
 def player_action(board):
 
-    print("Player 1 it's your turn")
-    
-    action = input("Enter a Number:")
-    board[int(action)-1] = "X"
-    
-    print_board(board)
+    r_counter = 0
+    while r_counter < 9:
+        r_counter += 1
+        print(f'{r_counter}')
 
+        if r_counter % 2 > 0:
+            pass
+            print("Player 1 it's your turn")
+            action = input("Enter a Number:")
+            board[int(action)-1] = "X"
+            print_board(board)
+        else:
+            print("Player 2 it's your turn")
+            action = input("Enter a Number:")
+            board[int(action)-1] = "O"
+            print_board(board)
+            
 board = create_board()
 print_board(board)
 player_action(board)
