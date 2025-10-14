@@ -14,6 +14,58 @@ def print_board(board):
         else:
             print(f"[{board_tile}]", end=" ")
 
+def winning_conditions(board):
+    
+    if board [0] == "X" and board [4] == "X" and board [8] == "X":
+        print("Player 1 won")
+        exit()
+    if board [2] == "X" and board [4] == "X" and board [6] == "X":
+        print("Player 1 won")
+        exit()
+    if board [0] == "X" and board [1] == "X" and board [2] == "X":
+        print("Player 1 won")
+        exit()
+    if board [3] == "X" and board [4] == "X" and board [5] == "X":
+        print("Player 1 won")
+        exit()
+    if board [6] == "X" and board [7] == "X" and board [8] == "X":
+        print("Player 1 won")
+        exit()
+    if board [0] == "X" and board [3] == "X" and board [6] == "X":
+        print("Player 1 won")
+        exit()
+    if board [1] == "X" and board [4] == "X" and board [8] == "X":
+        print("Player 1 won")
+        exit()
+    if board [2] == "X" and board [5] == "X" and board [9] == "X":
+        print("Player 1 won")
+        exit()
+    if board [0] == "O" and board [4] == "O" and board [8] == "O":
+        print("Player 2 won")
+        exit()
+    if board [2] == "O" and board [4] == "O" and board [6] == "O":
+        print("Player 2 won")
+        exit()
+    if board [0] == "O" and board [1] == "O" and board [2] == "O":
+        print("Player 2 won")
+        exit()
+    if board [3] == "O" and board [4] == "O" and board [5] == "O":
+        print("Player 2 won")
+        exit()
+    if board [6] == "O" and board [7] == "O" and board [8] == "O":
+        print("Player 2 won")
+        exit()
+    if board [0] == "O" and board [3] == "O" and board [6] == "O":
+        print("Player 2 won")
+        exit()
+    if board [1] == "O" and board [4] == "O" and board [8] == "O":
+        print("Player 2 won")
+        exit()
+    if board [2] == "O" and board [5] == "O" and board [9] == "O":
+        print("Player 2 won")
+        exit()
+    pass
+
  
 def get_input(board):
 
@@ -51,13 +103,14 @@ def player_action(board):
             action = get_input(board)
             print("This is the action", action)
             board[action] = "X"
-
             print_board(board)
+            winning_conditions(board)
         else:
             print("Player 2 it's your turn")
             action = get_input(board)
             board[action] = "O"
             print_board(board)
+            winning_conditions(board)
             
 board = create_board()
 print_board(board)
