@@ -14,6 +14,28 @@ def print_board(board):
         else:
             print(f"[{board_tile}]", end=" ")
 
+ 
+def get_input(board):
+
+    invalid = True
+    while (invalid):
+        action = input("Enter a number of an open tile or you lose: ")
+        try:
+            if int(action) in range(1, 10):
+                #print(action, f"{board[int(action)-1]}" + "This is my position")
+                if board[int(action)-1] == "X" or board[int(action)-1] == "O":
+                        print("Spot already taken.. you lose")
+                        exit()
+                else:
+                    invalid = False
+                    return int(action)-1
+
+        except ValueError:
+            print("I said enter a number... you lose")
+            exit()
+        else:
+            print("Haha, you lost")
+            exit()
 
 def player_action(board):
 
@@ -25,13 +47,16 @@ def player_action(board):
         if r_counter % 2 > 0:
             pass
             print("Player 1 it's your turn")
-            action = input("Enter a Number:")
-            board[int(action)-1] = "X"
+            
+            action = get_input(board)
+            print("This is the action", action)
+            board[action] = "X"
+
             print_board(board)
         else:
             print("Player 2 it's your turn")
-            action = input("Enter a Number:")
-            board[int(action)-1] = "O"
+            action = get_input(board)
+            board[action] = "O"
             print_board(board)
             
 board = create_board()
