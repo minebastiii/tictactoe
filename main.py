@@ -1,3 +1,4 @@
+        
 def create_board():
 
     board = [str(x+1) for x in range(9)]
@@ -16,55 +17,39 @@ def print_board(board):
 
 def winning_conditions(board):
     
-    if board [0] == "X" and board [4] == "X" and board [8] == "X":
-        print("Player 1 won")
-        exit()
-    if board [2] == "X" and board [4] == "X" and board [6] == "X":
-        print("Player 1 won")
-        exit()
-    if board [0] == "X" and board [1] == "X" and board [2] == "X":
-        print("Player 1 won")
-        exit()
-    if board [3] == "X" and board [4] == "X" and board [5] == "X":
-        print("Player 1 won")
-        exit()
-    if board [6] == "X" and board [7] == "X" and board [8] == "X":
-        print("Player 1 won")
-        exit()
-    if board [0] == "X" and board [3] == "X" and board [6] == "X":
-        print("Player 1 won")
-        exit()
-    if board [1] == "X" and board [4] == "X" and board [8] == "X":
-        print("Player 1 won")
-        exit()
-    if board [2] == "X" and board [5] == "X" and board [9] == "X":
-        print("Player 1 won")
-        exit()
-    if board [0] == "O" and board [4] == "O" and board [8] == "O":
-        print("Player 2 won")
-        exit()
-    if board [2] == "O" and board [4] == "O" and board [6] == "O":
-        print("Player 2 won")
-        exit()
-    if board [0] == "O" and board [1] == "O" and board [2] == "O":
-        print("Player 2 won")
-        exit()
-    if board [3] == "O" and board [4] == "O" and board [5] == "O":
-        print("Player 2 won")
-        exit()
-    if board [6] == "O" and board [7] == "O" and board [8] == "O":
-        print("Player 2 won")
-        exit()
-    if board [0] == "O" and board [3] == "O" and board [6] == "O":
-        print("Player 2 won")
-        exit()
-    if board [1] == "O" and board [4] == "O" and board [8] == "O":
-        print("Player 2 won")
-        exit()
-    if board [2] == "O" and board [5] == "O" and board [9] == "O":
-        print("Player 2 won")
-        exit()
-    pass
+    #increments are i+1; i+3; i % 2 == 0 !=1
+
+    for i in range(0,7,3):
+         if board[i] == board [i+1] == board[i+2]:
+            if board[i] == "X":
+                print("Player 1 won")
+                return -1
+            else:
+                print("Player 2 won")
+                return -1
+    for i in range(0,3,1):
+         if board[i] == board [i+3] == board[i+6]:
+            if board[i] == "X":
+                print("Player 1 won")
+                return -1
+            else:
+                print("Player 2 won")
+                return -1
+
+    if board [0] == board [4] == board [8]:
+        if board [0] == "X":
+            print("Player 1 won")
+            return -1
+        else:
+            print("PLayer 2 won")
+            return -1
+    if board [2] == board [4] == board [6]:
+        if board [2] == "X":
+            print("Player 1 won")
+            return -1
+        else:
+            print("Player 2 won")
+            return -1
 
  
 def get_input(board):
@@ -77,17 +62,18 @@ def get_input(board):
                 #print(action, f"{board[int(action)-1]}" + "This is my position")
                 if board[int(action)-1] == "X" or board[int(action)-1] == "O":
                         print("Spot already taken.. you lose")
-                        exit()
+                        return -1
                 else:
                     invalid = False
                     return int(action)-1
 
         except ValueError:
             print("I said enter a number... you lose")
-            exit()
+            return -1
         else:
             print("Haha, you lost")
-            exit()
+            return -1
+            
 
 def player_action(board):
 
@@ -99,19 +85,31 @@ def player_action(board):
         if r_counter % 2 > 0:
             pass
             print("Player 1 it's your turn")
-            
             action = get_input(board)
-            print("This is the action", action)
+            if action == -1:
+               return -1 
             board[action] = "X"
             print_board(board)
-            winning_conditions(board)
+            x = winning_conditions(board)
+            if x == -1:
+                return -1
         else:
             print("Player 2 it's your turn")
             action = get_input(board)
+            if action == -1:
+                return -1
             board[action] = "O"
             print_board(board)
-            winning_conditions(board)
-            
-board = create_board()
-print_board(board)
-player_action(board)
+            x = winning_conditions(board)
+            if x == -1:
+                return -1
+
+
+
+playagain ="yes"
+while playagain == "yes":
+    board = create_board()
+    print_board(board)
+    player_action(board)
+    print("Do you want to play again? type yes or no")
+    playagain = input()
