@@ -1,4 +1,14 @@
-        
+import time
+
+def starting_screen():
+    print("The game starts now")
+    print("...3")
+    time.sleep(1)
+    print("...2")
+    time.sleep(1)
+    print("...1")
+    time.sleep(1)
+
 def create_board():
 
     board = [str(x+1) for x in range(9)]
@@ -80,7 +90,7 @@ def player_action(board):
     r_counter = 0
     while r_counter < 9:
         r_counter += 1
-        print(f'{r_counter}')
+        #print(f'{r_counter}')
 
         if r_counter % 2 > 0:
             pass
@@ -108,8 +118,9 @@ def player_action(board):
 
 playagain ="yes"
 while playagain == "yes":
+    starting_screen()
     board = create_board()
     print_board(board)
     player_action(board)
-    print("Do you want to play again? type yes or no")
+    print("Do you want to play again? type yes")
     playagain = input()
