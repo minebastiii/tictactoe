@@ -1,13 +1,32 @@
 import time
 
+
 def starting_screen():
-    print("The game starts now")
+    print("Hello, this is my TicTacToe game.\nJust for your information, any wrong input will result in a loss.\n" \
+    "Before you start the game you have to decide whether you want to play versus a second player or against AI.\nHave fun! ")
+
+    
+    
+    invalid = True
+    while (invalid):
+        decide_player = input("Player or AI?: ")
+        if decide_player == "Player":
+            return -1
+        if decide_player == "AI":
+            return
+        if decide_player != "Player" or "AI":
+            print("Enter either 'Player' or 'AI'")
+        
+    
+def game_starts():
+    
     print("...3")
     time.sleep(1)
     print("...2")
     time.sleep(1)
     print("...1")
     time.sleep(1)
+    print("The game starts now")
 
 def create_board():
 
@@ -118,9 +137,17 @@ def player_action(board):
 
 playagain ="yes"
 while playagain == "yes":
-    starting_screen()
-    board = create_board()
-    print_board(board)
-    player_action(board)
-    print("Do you want to play again? type yes")
-    playagain = input()
+    if starting_screen() == -1:
+        game_starts()
+        board = create_board()
+        print_board(board)
+        player_action(board)
+        print("Do you want to play again? type yes")
+        playagain = input()
+    else:
+        game_starts()
+        board = create_board()
+        print_board(board)
+        player_action(board)
+        print("Do you want to play again? type yes")
+        playagain = input()
