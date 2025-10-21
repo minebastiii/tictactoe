@@ -46,8 +46,7 @@ def print_board(board):
 
 def winning_conditions(board):
     
-    #increments are i+1; i+3; i % 2 == 0 !=1
-
+    #rows
     for i in range(0,7,3):
          if board[i] == board [i+1] == board[i+2]:
             if board[i] == "X":
@@ -56,6 +55,7 @@ def winning_conditions(board):
             else:
                 print("Player 2 won")
                 return -1
+    #columns
     for i in range(0,3,1):
          if board[i] == board [i+3] == board[i+6]:
             if board[i] == "X":
@@ -64,7 +64,7 @@ def winning_conditions(board):
             else:
                 print("Player 2 won")
                 return -1
-
+    #diagonal
     if board [0] == board [4] == board [8]:
         if board [0] == "X":
             print("Player 1 won")
@@ -72,6 +72,7 @@ def winning_conditions(board):
         else:
             print("PLayer 2 won")
             return -1
+    #diagonal
     if board [2] == board [4] == board [6]:
         if board [2] == "X":
             print("Player 1 won")
@@ -104,66 +105,66 @@ def get_input(board):
             return -1
 
 def check_board(board):
-    #checks first row
-    for i in range(0,2,1):
-        if board[i] == board[i+1]:
-            if board[i] == "X":
-                return 1
-            if board[i] == "O":
-                return 2
-    #checks second row        
-    for i in range (3,5,1):
-        if board[i] == board[i+1]:
-            if board[i] == "X":
-                return 3
-            if board[i] == "O":
-                return 4
-    #checks third row        
-    for i in range (6,8,1):
-         if board[i] == board[i+1]:
-            if board[i] == "X":
-                return 5
-            if board[i] == "O":
-                return 6
-    #check rows for x ... x
+    #if second choose middle--> if corner is free chose a random corner
+
+    #rows
+  """  for i in range(0,7,3):
+        #checks for board[2,5,8] numpad 3,6,9
+        if board[i] == board [i+1] == board[""]:
+            if board[""] == "X" or "O":
+                return 
     for i in range(0,7,3):
-        if board[i] == board[i+2]:
-            if board[i] == "X":
-                return 7
-            if board[i] == "O":
-                return 8
-    #checks columns for x ... x        
+        #checks board [1,4,7] 
+        if board[i] == board [""] == board[i+2]:
+            if board[""] == "X" or "O":
+                return 
+        #check [0,3,6]
+    for i in range(0,7,3):
+        if board[""] == board [i+1] == board[i+2]:
+            if board[""] == "X" or "O":
+                return 
+            
+    #columns       
     for i in range(0,3,1):
-        if board[i] == board[i+6]:
-            if board[i] == "X":
-                return 9
-            if board[i] == "O":
-                return 10
-#checks any possible win con on diagonals
-    if board[0] == board[4] =="X":
-        return 11
-    if board[0] == board[4] =="O":
-        return 12
-    if board[0] == board[8] =="X":
-        return 13
-    if board[0] == board[8] =="O":
-        return 14
-    if board[8] == board[4] =="X":
-        return 15
-    if board[8] == board[4] =="O":
-        return 16
-    if board[2] == board[4] =="X":
-        return 17
-    if board[2] == board[4] =="O":
-        return 18
-    if board[6] == board[4] =="X":
-        return 19
-    if board[6] == board[4] =="O":
-        return 20
-    if board[2] == board[6] =="X":
-        return 21
-    if board[2] == board[6] =="O":
-        return 22
+         if board[i] == board [i+3] == board[""]:
+            if board[""] == "X" or "O":
+                return 
+                   
+    for i in range(0,3,1):
+         if board[i] == board [""] == board[i+6]:
+            if board[""] == "X" or "O":
+                return 
+      
+    for i in range(0,3,1):
+         if board[""] == board [i+3] == board[i+6]:
+            if board[""] == "X" or "O":
+                return 
+    #diagonals
+    if board [""] == board [4] == board [8]:
+        if board [""] == "X" or "O":
+            return 1
+    
+    if board [0] == board [""] == board [8]:
+        if board [""] == "X" or "O":
+            return 4
+    
+    if board [0] == board [4] == board [""]:
+        if board [""] == "X" or "O":
+            return 8
+    
+    if board [2] == board [4] == board [""]:
+        if board [""] == "X" or "O":
+            return 6
+    
+    if board [2] == board [""] == board [6]:
+        if board [""] == "X" or "O":
+            return 4
+    
+    if board [""] == board [4] == board [6]:
+        if board [""] == "X" or "O":
+            return 2"""
+
+
 
 def ai_moves(board):
     """Rules to set... 
@@ -173,11 +174,10 @@ def ai_moves(board):
     4. Place X or O for 2 win conditions
     5. Place 1 win con
     6. if there is no other way but a draw, make a random move
-    7. if ai is the first player, make a move in one corner"""
-    move = check_board(board)
-    if move:
-        
-        pass       
+    7. if ai is the first player, make a move in one corner
+    8. the second move..."""
+    move = 6 #check_board(board)
+    return move       
 
 def player_action(board):
 
@@ -191,7 +191,7 @@ def player_action(board):
             print("Player 1 it's your turn")
             action = get_input(board)
             if action == -1:
-               return -1 
+                return -1 
             board[action] = "X"
             print_board(board)
             x = winning_conditions(board)
@@ -213,60 +213,75 @@ def player_action_ai_action(board):
     p1 = ["Player", "AI"]
     res = random.choice(p1)
     if res == "Player":
+
          
         r_counter = 0
-    while r_counter < 9:
-        r_counter += 1
-        #print(f'{r_counter}')
+        while r_counter < 9:
+            r_counter += 1
+            #print(f'{r_counter}')
 
-        if r_counter % 2 > 0:
-            pass
-            print("Player 1 it's your turn")
-            action = get_input(board)
-            if action == -1:
-               return -1 
-            board[action] = "X"
-            print_board(board)
-            x = winning_conditions(board)
-            if x == -1:
-                return -1
-        else:
-            action = ai_moves(board)
-            if action == -1:
-                return -1
-            board[action] = "O"
-            print_board(board)
-            x = winning_conditions(board)
-            if x == -1:
-                return -1
+            if r_counter % 2 > 0:
+                pass
+                print("Player 1 it's your turn")
+                action = get_input(board)
+                if action == -1:
+                    return -1 
+                board[action] = "X"
+                print_board(board)
+                x = winning_conditions(board)
+                if x == -1:
+                    return -1
+            else:
+                action = ai_moves(board)
+                if action == -1:
+                    return -1
+                board[int(action)] = "O"
+                print_board(board)
+                x = winning_conditions(board)
+                if x == -1:
+                    return -1
             
     if res == "AI":
          
-        r_counter = 0
-    while r_counter < 9:
-        r_counter += 1
-        #print(f'{r_counter}')
-
-        if r_counter % 2 > 0:
-            pass
-            action = ai_moves(board)
-            if action == -1:
-                return -1
-            board[action] = "O"
-            print_board(board)
-            x = winning_conditions(board)
-            if x == -1:
-                return -1
-        else:
-            print("Player 2 it's your turn")
-            action = get_input(board)
-            if action == -1:
-                return -1
-            board[action] = "O"
-            print_board(board)
-            x = winning_conditions(board)
-            if x == -1:
-                return -1
+        r_counter = -1
+        while r_counter < 9:
+            r_counter += 1
+            print(f'{r_counter}')
+        
+            if r_counter == 0:
+                print("My turn!")
+                first_move =[1, 3, 7, 9]
+                res = random.choice(first_move)
+                action = res
+                board[int(action-1)] = "X"
+                print_board(board)
+                x = winning_conditions(board)
+                if x == -1:
+                    r_counter +=1
+                    return -1
+            
+        #print(f'{r_counter}')    
+            if r_counter % 2 > 0:
+                    print("It's my turn!")
+                    action = ai_moves(board)
+                    if action == -1:
+                        return -1
+                    board[int(action)-1] = "X"
+                    print_board(board)
+                    x = winning_conditions(board)
+                    if x == -1:
+                        return -1
+            
+            else:
+                print("Player 2 it's your turn")
+                action = get_input(board)
+                if action == -1:
+                    return -1
+                board[action] = "O"
+                print_board(board)
+                x = winning_conditions(board)
+                if x == -1:
+                    return -1
 pass
 
 playagain ="yes"
